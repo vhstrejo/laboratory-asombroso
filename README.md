@@ -1,4 +1,4 @@
-# Asomboroso front-end interface
+# Asomboroso Activate front-end interface
 
 | Resource | Description
 |-|-
