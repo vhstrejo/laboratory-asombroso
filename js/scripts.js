@@ -33,6 +33,6 @@ $checkOwner = async function () {
 $(function () {
 
 $checkOwner();
-
+$('#biosample').append(biosampleId);
 
 });

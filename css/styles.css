@@ -7,6 +7,10 @@ b, strong {
 	    max-height: 98px;
     overflow: hidden;
 }
+.bg-data {
+	background: url(../images/bg-asombroso.jpg) no-repeat top center;
+	background-size: cover;
+}
 .full-height {height:100vh;}
 .labProfile, .bioprofile .biosampleProfile  {display:none;}
 	.form-control {
