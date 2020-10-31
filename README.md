@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Asomboroso front-end interface
-=======
 # Asomboroso Activate front-end interface
->>>>>>> 18f8bf70786c34a3dd08042b088bab5bf0cdab6f
 
 | Resource | Description
 |-|-
