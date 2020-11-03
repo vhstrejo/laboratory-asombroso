@@ -48,8 +48,57 @@ $(function () {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const biosampleId = urlParams.get('biosampleId');
+  const timestamp = urlParams.get('timestamp');
+  const signature = urlParams.get('signature');
 
+  // Perform actions.
   $checkOwner(biosampleId);
   $checkurl();
-
+  $verifySignature(signature, biosampleId, timestamp); // TODO
 });
+
+/**
+ * Extracts a wallet address from the signature.
+ * @param signature Raw signature.
+ * @param biosampleId Biosample ID (needed for claim).
+ * @param timestamp Timestamp number (needed for claim).
+ */
+function $verifySignature(signature, biosampleId, timestamp) {
+  biosampleId = leftPad(parseInt(biosampleId), 12, '0', false);
+  const label = "io.genobank.io.test.login-third-party|laboratory-asombroso";
+  const claimData = `0x${stringToHex(label)}${biosampleId}${timestamp}`;
+  const data = ethers.utils.keccak256(claimData);
+  const address = ethers.utils.recoverAddress(data, signature);
+  console.log("Signature address:", address); // TODO
+}
+
+/**
+ * Converts the provided input into HEX.
+ * 
+ * @param input Arbitrary string.
+ */
+function stringToHex(input) {
+  return unescape(encodeURIComponent(input))
+    .split('').map(function(v) {
+      return v.charCodeAt(0).toString(16)
+    }).join('');
+}
+
+/**
+ * Adds left padding to the inoput.
+ * 
+ * @param input Arbitrary string.
+ */
+function leftPad(input, chars, sign, prefix) {
+  const hasPrefix = prefix === undefined
+    ? /^0x/i.test(input) || typeof input === 'number'
+    : prefix;
+
+  input = input.toString(16).replace(/^0x/i, '');
+
+  const padding = (chars - input.length + 1 >= 0)
+    ? chars - input.length + 1
+    : 0;
+
+  return (hasPrefix ? '0x' : '') + new Array(padding).join(sign ? sign : '0') + input;
+}
