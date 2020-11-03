@@ -4,7 +4,7 @@ var biosampleId = null;
 emptyUrl = window.location.href.indexOf('?')
 
 /**
- * Checks if the biosample already exists.
+ * Checks if the provided biosample ID already exists.
  */
 $checkOwner = async function (biosampleId) {
     await fetch(`https://app.genobank.io/biosamples/${biosampleId}`, {
@@ -13,9 +13,9 @@ $checkOwner = async function (biosampleId) {
           "Content-type": "application/json; charset=UTF-8"
         },
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.owner) { // already exists
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.data.owner) { // already exists
           // TODO
         } else { // continue
           $('#invalidError').modal('show');
@@ -48,7 +48,6 @@ $(function () {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const biosampleId = urlParams.get('biosampleId');
-  console.log(biosampleId);
 
   $checkOwner(biosampleId);
   $checkurl();
