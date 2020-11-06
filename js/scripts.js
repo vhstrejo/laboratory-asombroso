@@ -66,7 +66,7 @@ $(function () {
 function $verifySignature(signature, biosampleId, timestamp) {
   biosampleId = leftPad(parseInt(biosampleId), 12, '0', false);
   const label = "io.genobank.io.test.login-third-party|laboratory-asombroso";
-  const claimData = `0x${stringToHex(label)}${biosampleId}${timestamp}`;
+  const claimData = `0x${biosampleId}${timestamp}${stringToHex(label)}`;
   const data = ethers.utils.keccak256(claimData);
   const address = ethers.utils.recoverAddress(data, signature);
   console.log("Signature address:", address); // TODO
