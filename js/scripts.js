@@ -25,9 +25,9 @@ $checkOwner = async function () {
 
 $checkurl = function () {
 	if (emptyUrl == -1) {
-		$('#invalidError').modal('show');
+
 	}  else {
-		$('#invalidError').modal('hide');
+
 		
 
 parts = pageURL.split("?")[1].split("#");
@@ -39,9 +39,28 @@ signature = parts[2].split("=")[1];
 	} 
 }
 
+$clearFields = function () {
+  $('input, textarea').each(function() {
+
+		var default_value = this.value;
+
+		$(this).focus(function(){
+				if(this.value == default_value) {
+						this.value = '';
+				}
+		});
+
+		$(this).blur(function(){
+				if(this.value == '') {
+						this.value = default_value;
+				}
+    });
+  });
+}
+
 $(function () {
 
-$checkOwner();
-$checkurl();
+  $checkOwner();
 
+  $clearFields();
 });
