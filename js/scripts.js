@@ -2,19 +2,23 @@
 var pageURL = $(location).attr("href");
 var biosampleId = null;
 emptyUrl = window.location.href.indexOf('?')
-$checkOwner = async function () {
-    await fetch(`https://app.genobank.io/biosamples/`, {
+
+/**
+ * Checks if the provided biosample ID already exists.
+ */
+$checkOwner = async function (biosampleId) {
+    await fetch(`https://app.genobank.io/biosamples/${biosampleId}`, {
         method: 'GET',
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         },
       })
-      .then(response => response.json())
-      .then(data => {
-        if (data.owner) { // already exists
-            
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.data.owner) { // already exists
+          // TODO
         } else { // continue
-             $('#invalidKit').modal('show');
+          $('#invalidError').modal('show');
         }
       })
       .catch((error) => {
@@ -27,14 +31,13 @@ $checkurl = function () {
 	if (emptyUrl == -1) {
 
 	}  else {
+		$('#invalidError').modal('hide');
 
-		
-
-parts = pageURL.split("?")[1].split("#");
-parts = parts[0].split("&");
-biosampleId = parts[0].split("=")[1];
-timestamp = parts[1].split("=")[1];
-signature = parts[2].split("=")[1];
+    parts = pageURL.split("?")[1].split("#");
+    parts = parts[0].split("&");
+    biosampleId = parts[0].split("=")[1];
+    timestamp = parts[1].split("=")[1];
+    signature = parts[2].split("=")[1];
 		$('#biosample').append(biosampleId);
 	} 
 }
@@ -60,7 +63,61 @@ $clearFields = function () {
 
 $(function () {
 
-  $checkOwner();
+  // Parse querystring and its parameters.
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const biosampleId = urlParams.get('biosampleId');
+  const timestamp = urlParams.get('timestamp');
+  const signature = urlParams.get('signature');
 
-  $clearFields();
+  // Perform actions.
+  $checkOwner(biosampleId);
+  $checkurl();
+  $verifySignature(signature, biosampleId, timestamp); // TODO
 });
+
+/**
+ * Extracts a wallet address from the signature.
+ * @param signature Raw signature.
+ * @param biosampleId Biosample ID (needed for claim).
+ * @param timestamp Timestamp number (needed for claim).
+ */
+function $verifySignature(signature, biosampleId, timestamp) {
+  biosampleId = leftPad(parseInt(biosampleId), 12, '0', false);
+  const label = "io.genobank.io.test.login-third-party|laboratory-asombroso";
+  const claimData = `0x${biosampleId}${timestamp}${stringToHex(label)}`;
+  const data = ethers.utils.keccak256(claimData);
+  const address = ethers.utils.recoverAddress(data, signature);
+  console.log("Signature address:", address); // TODO
+}
+
+/**
+ * Converts the provided input into HEX.
+ * 
+ * @param input Arbitrary string.
+ */
+function stringToHex(input) {
+  return unescape(encodeURIComponent(input))
+    .split('').map(function(v) {
+      return v.charCodeAt(0).toString(16)
+    }).join('');
+}
+
+/**
+ * Adds left padding to the inoput.
+ * 
+ * @param input Arbitrary string.
+ */
+function leftPad(input, chars, sign, prefix) {
+  const hasPrefix = prefix === undefined
+    ? /^0x/i.test(input) || typeof input === 'number'
+    : prefix;
+
+  input = input.toString(16).replace(/^0x/i, '');
+
+  const padding = (chars - input.length + 1 >= 0)
+    ? chars - input.length + 1
+    : 0;
+
+  return (hasPrefix ? '0x' : '') + new Array(padding).join(sign ? sign : '0') + input;
+}
