@@ -7,7 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+		<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+		rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 
@@ -16,7 +17,7 @@
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Red+Hat+Text:wght@500&family=Roboto+Condensed:wght@400;700&family=Roboto:wght@500;700&family=Source+Sans+Pro&display=swap" rel="stylesheet">
-
+	
     <title>Data Access</title>
 </head>
 <body>
@@ -146,42 +147,43 @@
 								<div class="biosample-tag">Lab #1</div>
 								<p class="no-gap-bottom astronaut-color">Description of Lab</p>
 							</div>
-							<button class="blue-button view">Accepted</button>
+					
+							<input type="checkbox" checked data-toggle="toggle" data-style="ios" class="toggle-style1" >
 						</div>
 						<div class="biosample-item">
 							<div>
 								<div class="biosample-tag">Lab #2</div>
 								<p class="no-gap-bottom astronaut-color">Description of Lab</p>
 							</div>
-							<button class="blue-button view">Accepted</button>
+							<input type="checkbox" checked data-toggle="toggle" data-style="ios" class="toggle-style1" >
 						</div>
 						<div class="biosample-item">
 							<div>
 								<div class="biosample-tag">Lab #3</div>
 								<p class="no-gap-bottom astronaut-color">Description of Lab</p>
 							</div>
-							<button class="blue-button view">Accepted</button>
+							<input type="checkbox" checked data-toggle="toggle" data-style="ios" class="toggle-style1" >
 						</div>
 						<div class="biosample-item">
 							<div>
 								<div class="biosample-tag">Lab #4</div>
 								<p class="no-gap-bottom astronaut-color">Description of Lab</p>
 							</div>
-							<button class="blue-button view rejected">Rejected</button>
+							<input type="checkbox" unchecked data-toggle="toggle" data-style="ios" class="toggle-style1">
 						</div>
 						<div class="biosample-item">
 							<div>
 								<div class="biosample-tag">Lab #5</div>
 								<p class="no-gap-bottom astronaut-color">Description of Lab</p>
 							</div>
-							<button class="blue-button view">Accepted</button>
+							<input type="checkbox" checked data-toggle="toggle" data-style="ios" class="toggle-style1" >
 						</div>
 						<div class="biosample-item">
 							<div>
 								<div class="biosample-tag">Lab #6</div>
 								<p class="no-gap-bottom astronaut-color">Description of Lab</p>
 							</div>
-							<button class="blue-button view">Accepted</button>
+							<input type="checkbox" unchecked data-toggle="toggle" data-style="ios" class="toggle-style1" >
 						</div>
 					</div>
 
@@ -202,13 +204,30 @@
 			<!-- End Footer -->
 		</div>
     </div>
-
+	<div class="modal" tabindex="-1" role="dialog" id="authorize" >
+		<div class="modal-dialog modal-full" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Authorize</h5>
+	
+				</div>
+				<div class="modal-body justify-content-cente text-center">
+					<img class="img-fluid rescan mx-auto my-4" src="img/scan.svg" alt="Re-Scan Kit">
+					<h3>Scan QR Code With Your Phone </h3>
+					<p class="mx-3 m">Please scan to authorize using the wallet.</p>
+				</div>
+	
+			</div>
+		</div>
+	</div>
  	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <!-- Custom js -->
+
+	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+	<!-- Custom js -->
 	<script src="js/custom.js"></script>
 <script>
 	$(function () {
@@ -222,6 +241,10 @@
 		var link = '/beta/index.html?email=' + $getEmail;
 		$('a.btn-loginhome').attr('href', link);
 
+
+		$('.toggle-group').on("click", function () {
+			   $('#authorize').modal('show');
+		});
 
 	});
 
