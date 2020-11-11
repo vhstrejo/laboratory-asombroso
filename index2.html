@@ -285,8 +285,8 @@
                                     <img class="d-flex mr-3 rounded-circle thumb-md" src="images/users/user-3.jpg"
                                         alt="Generic placeholder image">
                                     <div class="media-body align-self-center">
-                                        <h4 class="font-14 m-0">John Doe</h4>
-                                        <small class="text-muted">johndoe@email.com</small>
+                                        <h4 class="font-14 m-0"></h4>
+                                        <small class="text-muted replyfield-email"></small>
                                     </div>
                                 </div>
 
@@ -503,7 +503,7 @@
                                                                                                                                         <div>
                                                                                                                                             <h2>Please
                                                                                                                                                 Confirm
-                                                                                                                                                Email
+                                                                                                                                                <span class="replyfield-email"></span>  
                                                                                                                                             </h2>
                                                                                                                                             <div
                                                                                                                                                 style="font-family: inherit; text-align: inherit">
@@ -569,7 +569,8 @@
                                                                                                                                                         bgcolor="#0030F5"
                                                                                                                                                         class="inner-td"
                                                                                                                                                         style="border-radius:6px; font-size:16px; text-align:center; background-color:inherit;">
-                                                                                                                                                        <a href="index3.html"
+                                                                                                                                                        <a href=""
+                                                                                                                                                            class="btn-loginhome"
                                                                                                                                                             style="background-color:#0030F5; border:1px solid #0030F5; border-color:#0030F5; border-radius:100px; border-width:1px; color:#ffffff; display:inline-block; font-size:14px; font-weight:normal; letter-spacing:0px; line-height:normal; padding:12px 18px 12px 18px; text-align:center; text-decoration:none; border-style:solid;"
                                                                                                                                                             target="_blank">Confirm
                                                                                                                                                             Account</a>
@@ -697,6 +698,22 @@
     <!-- App js -->
     <script src="js/app.js"></script>
 
+    <script>
+        $(function () {
+          pageURL = $(location).attr("href");
+          $getEmail = pageURL.split("=")[1];
+            $(".replyfield-email") .append($getEmail);
+
+          
+                //check if last name is there
+             
+                    var link = '/beta/index.html?email=' + $getEmail;
+                    $('a.btn-loginhome').attr('href', link);
+                
+          
+        });
+
+    </script>
 </body>
-asdfasdfsdf
+
 </html>

@@ -2,10 +2,32 @@
 var pageURL = $(location).attr("href");
 var biosampleId = null;
 emptyUrl = window.location.href.indexOf('?')
+$emailLink = $("a.btn-register").attr("href");
 
 /**
  * Checks if the provided biosample ID already exists.
  */
+
+
+ $('input, textarea').each(function() {
+
+		var default_value = this.value;
+
+		$(this).focus(function(){
+				if(this.value == default_value) {
+						this.value = '';
+				}
+		});
+
+		$(this).blur(function(){
+				if(this.value == '') {
+						this.value = default_value;
+				}
+		});
+
+  });
+  
+  
 $checkOwner = async function (biosampleId) {
     await fetch(`https://app.genobank.io/biosamples/${biosampleId}`, {
         method: 'GET',
@@ -22,7 +44,8 @@ $checkOwner = async function (biosampleId) {
         }
       })
       .catch((error) => {
-        alert('Error:', error);
+        
+        $('#invalidError').modal('show');
         console.error('Error:', error);
       });
 	}
@@ -63,6 +86,16 @@ $clearFields = function () {
 
 $(function () {
 
+  
+   $('.input-email').on('blur', function(){
+
+        var $email = $('input.input-email').val()
+        //check if last name is there
+        if($email.length !== 0){
+            var link = '/index2.html?email='+ $email ;
+            $('a.btn-register').attr('href',link);
+     }
+  });
   // Parse querystring and its parameters.
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
