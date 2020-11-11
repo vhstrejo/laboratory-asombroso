@@ -1,0 +1,15 @@
+{
+  "name": "asombroso",
+  "version": "1.0.0",
+  "description": "DNA biodata on a blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fred madrid",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^5.0.14",
+    "hyperapp": "^2.0.8"
+  }
+}
