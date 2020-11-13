@@ -29,7 +29,7 @@ $emailLink = $("a.btn-register").attr("href");
   
   
 $checkOwner = async function (biosampleId) {
-    await fetch(`https://app.genobank.io/biosamples/${biosampleId}`, {
+    await fetch(`https://api-staging.genobank.io/biosamples/${biosampleId}`, {
         method: 'GET',
         headers: {
           "Content-type": "application/json; charset=UTF-8"
