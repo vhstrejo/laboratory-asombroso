@@ -92,7 +92,7 @@ $(function () {
         var $email = $('input.input-email').val()
         //check if last name is there
         if($email.length !== 0){
-            var link = '/index2.html?email='+ $email ;
+            var link = 'index2.html?email='+ $email ;
             $('a.btn-register').attr('href',link);
      }
   });
