@@ -78,7 +78,7 @@ function getConsentData() {
  * @param data Consent data as JSON.
  */
 async function uploadConsent(pubKey, data) {
-	await fetch(`https://app.genobank.io/documents/${pubKey}`, {
+	await fetch(`https://api-staging.genobank.io/documents/${pubKey}`, {
 		method: 'POST',
 		headers: {
 			"Content-type": "application/json; charset=UTF-8"
@@ -115,7 +115,7 @@ async function claimBiosample() {
   const dataArray = ethers.utils.arrayify(data);
   const signature = await wallet.signMessage(dataArray);
 
-	const response = await fetch(`https://app.genobank.io/claim/${tokenID.substring(2)}`, {
+	const response = await fetch(`https://api-staging.genobank.io/claim/${tokenID.substring(2)}`, {
 		method: 'POST',
 		headers: {
 			"Content-type": "application/json; charset=UTF-8"
@@ -301,7 +301,7 @@ $(function () {
 	});
 
 	$('.btn-gotoConsent').on("click", async function () {
-    await fetch(`https://app.genobank.io/biosamples/${biosampleId}`, {
+    await fetch(`https://api-staging.genobank.io/biosamples/${biosampleId}`, {
         method: 'GET',
         headers: {
           "Content-type": "application/json; charset=UTF-8"
