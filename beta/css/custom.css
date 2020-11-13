@@ -9,6 +9,25 @@ p{
 button{
     font-family: 'Roboto Condensed', sans-serif;
 }
+	
+.btn-primary {
+background:#f51656;
+border-color:#f51656;
+}
+.btn-primary:hover, .btn-primary:focus.btn-primary:active {
+   background:#f51656;
+border-color:#f51656;
+}
+.toggle.ios,
+.toggle-on.ios,
+.toggle-off.ios {
+    border-radius: 20rem;
+}
+
+.toggle.ios .toggle-handle {
+    border-radius: 20rem;
+}
+				
 ul {
     padding-left: 21px;
     color: #848F91;
@@ -301,13 +320,14 @@ img.mobile-close-button {
     opacity: .8;
 }
 .button-v1 {
-    background: #5DE7F8;
+    background: #f51656;
     font-weight: bold;
     letter-spacing: 0.036703px;
     border-radius: 100px;
     text-align: center;
     min-width: 236px;
     padding: 12px;
+    color:#fff;
 }
 .card-v1 {
     padding: 20px 35px;
@@ -471,7 +491,7 @@ img.mobile-close-button {
     font-size: 16px;
     font-family: 'Red Hat Text', sans-serif;
 }
-.blue-button {
+.red-button {
     background: #001FFF;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 58px;
@@ -483,10 +503,25 @@ img.mobile-close-button {
     color: #fff;
     transition: .2s;
 }
-button.blue-button:hover {
+
+.red-button {
+    background: #f51656;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 58px;
+    border: 0;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 26px;
+    color: #fff;
+    transition: .2s;
+    min-width:120px;
+}
+
+button.red-button:hover {
     box-shadow: none;
 }
-button.blue-button.view {
+button.red-button.view {
     padding: 13px 37px;
     margin-top: 0px;
 }
