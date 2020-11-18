@@ -29,7 +29,7 @@ $emailLink = $("a.btn-register").attr("href");
   
   
 $checkOwner = async function (biosampleId) {
-    await fetch(`https://app.genobank.io/biosamples/${biosampleId}`, {
+    await fetch(`https://api-staging.genobank.io/biosamples/${biosampleId}`, {
         method: 'GET',
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -92,7 +92,7 @@ $(function () {
         var $email = $('input.input-email').val()
         //check if last name is there
         if($email.length !== 0){
-            var link = '/index2.html?email='+ $email ;
+            var link = 'index2.html?email='+ $email ;
             $('a.btn-register').attr('href',link);
      }
   });
