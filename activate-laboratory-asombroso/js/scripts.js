@@ -317,7 +317,7 @@ $(function () {
         }
       })
       .catch((error) => {
-        alert('Error:', error);
+       $('#invalidKit').modal('show');
         console.error('Error:', error);
       });
 	});
@@ -420,13 +420,13 @@ $(function () {
             2000);
 
         } else {
-          alert('Error');
+       $('#invalidKit').modal('show');
         }
       
 
 			} else {
 
-				alert('Sorry wrong order. Please try again. ');
+				$('#invalidKit').modal('show');
 			}
 		});
 	});
