@@ -317,7 +317,7 @@ $(function () {
         }
       })
       .catch((error) => {
-        alert('Error:', error);
+       $('#invalidKit').modal('show');
         console.error('Error:', error);
       });
 	});
@@ -414,20 +414,19 @@ $(function () {
                                target="_blank" class=" btn btn-primary  btn-shadow btn-gotostep4">Continue</a>
                         </div>
                     </div>
-
                 `
               );
             },
             2000);
 
         } else {
-          alert('Error');
+       $('#invalidKit').modal('show');
         }
       
 
 			} else {
 
-				alert('Sorry wrong order. Please try again. ');
+				$('#invalidKit').modal('show');
 			}
 		});
 	});
